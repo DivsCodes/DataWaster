@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <meta name="description" content="A simple data wasting utility with live speed and progress tracking." />
+  <title>Data Waster — Burn Some Data</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="badge"><span class="dot"></span> DATA WASTER 3.0</div>
+      <h1>Burn your <span>valuable</span> data.</h1>
+      <p class="subtitle">A tiny, ridiculous utility for intentionally using your internet data — now with better controls and live stats.</p>
+    </section>
+
+    <section class="panel setup" aria-label="Data waste controls">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">TARGET</p>
+          <h2>How much data?</h2>
+        </div>
+        <div class="unit-pill">MB</div>
+      </div>
+
+      <div class="input-row">
+        <input id="targetInput" type="number" min="0" step="1" value="500" inputmode="numeric" aria-label="Target data in megabytes" />
+        <button class="primary" id="startBtn">Start wasting</button>
+      </div>
+      <p class="hint"><strong>0 = infinite</strong> — keep wasting until you stop it.</p>
+
+      <div class="presets" role="group" aria-label="Quick presets">
+        <button data-preset="100">100 MB</button>
+        <button data-preset="500">500 MB</button>
+        <button data-preset="1000">1 GB</button>
+        <button data-preset="5000">5 GB</button>
+        <button data-preset="0">∞ Infinite</button>
+      </div>
+
+      <details class="advanced">
+        <summary>Advanced</summary>
+        <div class="advanced-grid">
+          <label>
+            Download chunk
+            <select id="chunkSelect">
+              <option value="1048576">1 MB</option>
+              <option value="5242880" selected>5 MB</option>
+              <option value="10485760">10 MB</option>
+            </select>
+          </label>
+          <label class="toggle-label">
+            Keep screen awake
+            <input id="wakeToggle" type="checkbox" checked />
+            <span class="switch"></span>
+          </label>
+        </div>
+      </details>
+    </section>
+
+    <section class="panel monitor" aria-label="Live statistics">
+      <div class="monitor-top">
+        <div>
+          <p class="eyebrow">LIVE SESSION</p>
+          <h2 id="statusTitle">Ready to waste.</h2>
+        </div>
+        <span class="status-chip" id="statusChip">IDLE</span>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="progress-meta">
+          <span id="progressText">0 MB / 500 MB</span>
+          <span id="etaText">—</span>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><span>WASTED</span><strong id="wastedStat">0 MB</strong></div>
+        <div class="stat-card"><span>SPEED</span><strong id="speedStat">0 Mbps</strong></div>
+        <div class="stat-card"><span>ELAPSED</span><strong id="elapsedStat">00:00</strong></div>
+        <div class="stat-card"><span>PEAK</span><strong id="peakStat">0 Mbps</strong></div>
+      </div>
+
+      <div class="graph-card">
+        <div class="graph-header"><span>Throughput</span><span id="graphLabel">Waiting for data…</span></div>
+        <canvas id="speedCanvas" width="900" height="220" aria-label="Live speed graph"></canvas>
+      </div>
+
+      <div class="actions">
+        <button id="pauseBtn" disabled>Pause</button>
+        <button class="danger" id="stopBtn" disabled>Stop</button>
+      </div>
+
+      <p class="status-note" id="statusNote">Nothing is being downloaded yet.</p>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="monitor-top">
+        <div>
+          <p class="eyebrow">LOCAL HISTORY</p>
+          <h2>Recent sessions</h2>
+        </div>
+        <button id="clearHistoryBtn" class="text-button">Clear</button>
+      </div>
+      <div id="historyList" class="history-list">
+        <div class="empty-history">No finished sessions yet.</div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Built as an independent remake inspired by the simple Data Waster concept.</span>
+      <span>Downloads real data — use Wi‑Fi or an unlimited plan.</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
